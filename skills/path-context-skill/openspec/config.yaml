@@ -1,0 +1,51 @@
+schema: spec-driven
+
+context: |
+  Tech stack: New project — output will be a Claude Code skill (SKILL.md) + optional agent config
+  Architecture: Skill-based AI tooling — SKILL.md file(s), no runtime code
+  Testing: None (no test runner — Strict TDD unavailable)
+  Style: Markdown, YAML frontmatter, conventional commits
+
+strict_tdd: false
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+    - Identify affected modules/packages
+  specs:
+    - Use Given/When/Then format for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include sequence diagrams for complex flows
+    - Document architecture decisions with rationale
+  tasks:
+    - Group tasks by phase (infrastructure, implementation, testing)
+    - Use hierarchical numbering (1.1, 1.2, etc.)
+    - Keep tasks small enough to complete in one session
+  apply:
+    - Follow existing skill patterns (see ~/.claude/skills/skill-creator/SKILL.md)
+    - Output is SKILL.md files, not source code
+    tdd: false
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: ""
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas
+
+testing:
+  strict_tdd: false
+  detected: "2026-04-06"
+  test_runner:
+    available: false
+  layers:
+    unit: false
+    integration: false
+    e2e: false
+  coverage:
+    available: false
+  quality_tools:
+    linter: false
+    type_checker: false
+    formatter: false

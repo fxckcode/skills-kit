@@ -1,0 +1,17 @@
+change: api-test-skill
+created: "2026-04-18"
+artifact_store: openspec
+mode: interactive
+
+phases:
+  explore: completed
+  proposal: completed
+  spec: completed
+  design: completed
+  tasks: completed
+  apply: completed
+  verify: completed
+  archive: completed
+
+warnings_carried_forward:
+  - WARN-002: CLAUDE.md description text differs cosmetically from task spec (non-blocking)

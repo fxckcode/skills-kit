@@ -1,0 +1,14 @@
+change: path-context
+created: "2026-04-06"
+artifact_store: openspec
+mode: automatic
+
+phases:
+  explore: completed
+  proposal: completed
+  spec: completed
+  design: completed
+  tasks: completed
+  apply: completed
+  verify: completed
+  archive: completed

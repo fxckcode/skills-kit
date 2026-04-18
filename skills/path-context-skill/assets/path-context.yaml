@@ -1,0 +1,65 @@
+# path-context.yaml — Configuration for the path-context skill
+#
+# Config file locations (checked in order, project takes precedence):
+#   1. .claude/path-context.yaml        (project-level — highest priority)
+#   2. ~/.claude/path-context.yaml      (global — fallback)
+#
+# Project-level entries override global entries for the same alias.
+# This file is READ-ONLY at runtime — the skill never writes to it.
+#
+# Required: at least one entry under `paths`.
+# An empty `paths` array is treated as no config (skill uses in-prompt paths only).
+
+paths:
+    # ── Example 1: Full entry with all optional fields ──────────────────────────
+  - path: /absolute/path/to/your/project    # REQUIRED — absolute path to the project folder
+
+    # Short name used in-prompt: "@context design-system" instead of the full path.
+    # Default: basename of path (e.g., /projects/design-system → design-system)
+    alias: design-system
+
+    # Restrict discovery to these glob patterns (relative to `path`).
+    # If specified, ONLY files matching at least one pattern are considered.
+    # The hard-coded ignore list still applies on top of this.
+    # Default: all source files (filtered by ignore list)
+    include:
+      - "src/**"
+      - "lib/**"
+      - "packages/core/**"
+
+    # Additionally exclude these patterns from discovery candidates.
+    # Applied after `include` — removes files even if they match include.
+    # Default: none (ignore list already handles common noise dirs)
+    exclude:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "**/*.stories.*"
+      - "**/fixtures/**"
+      - "**/mocks/**"
+
+    # ── Example 2: Minimal entry ─────────────────────────────────────────────────
+  - path: /another/absolute/path/to/project
+    # alias defaults to "project" (basename of path above)
+    # include defaults to all source files
+    # exclude defaults to none
+
+    # ── Example 3: Backend API project ───────────────────────────────────────────
+  # - path: /projects/my-api
+  #   alias: api
+  #   include:
+  #     - "src/**"
+  #     - "cmd/**"
+  #   exclude:
+  #     - "**/*_test.go"
+  #     - "**/testdata/**"
+
+    # ── Example 4: Design system (tokens + components only) ──────────────────────
+  # - path: /projects/design-system
+  #   alias: ds
+  #   include:
+  #     - "src/components/**"
+  #     - "tokens/**"
+  #     - "src/styles/**"
+  #   exclude:
+  #     - "**/*.stories.*"
+  #     - "**/*.mdx"
