@@ -21,12 +21,7 @@ Install all skills with a single command:
 npx skills add fxckcode/skills-kit
 ```
 
-This will download and install the complete skills kit including:
 
-- **git-setup-skill**: Professional Git/GitHub repository setup: `.gitignore`, `.gitattributes`, README files, licensing, metadata, tags, releases, and GitHub Actions
-- **swarm-forge-skill**: Guided project context setup for multi-CLI agent workflows across Claude Code, Codex, OpenCode, and Gemini CLI using patterns like TDD, BDD, ATDD, and SDD
-- **path-context-skill**: Behavioral protocol for registering external project folders as reference context, with a 6-pass discovery heuristic and strict per-turn token budget
-- **api-test-skill**: Protocol-first, client-agnostic skill for testing REST APIs end-to-end from the terminal
 
 ### Install individual skills (optional)
 
