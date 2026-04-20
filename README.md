@@ -13,33 +13,41 @@ A collection of agent skills for repository setup, multi-CLI agent workflows, an
 
 ## Install
 
-Clone this repo and copy individual skills into your agent skills directory:
+### Install with npx skills add
+
+Install any skill directly with `npx skills add`:
 
 ```bash
-git clone https://github.com/fxckcode/skills-kit.git
+npx skills add fxckcode/skills-kit/skills/git-setup-skill
+npx skills add fxckcode/skills-kit/skills/swarm-forge-skill  
+npx skills add fxckcode/skills-kit/skills/path-context-skill
+npx skills add fxckcode/skills-kit/skills/api-test-skill
 ```
 
-Then copy the skill you want:
-
-```bash
-cp -R skills-kit/skills/git-setup-skill    "$HOME/.agents/skills/git-setup-skill"
-cp -R skills-kit/skills/swarm-forge-skill  "$HOME/.agents/skills/swarm-forge-skill"
-cp -R skills-kit/skills/path-context-skill "$HOME/.agents/skills/path-context-skill"
-cp -R skills-kit/skills/api-test-skill    "$HOME/.agents/skills/api-test-skill"
-```
-
-Or copy into an agent workspace folder:
-
-```bash
-cp -R skills-kit/skills/git-setup-skill    /path/to/your/workspace/.claude/skills/git-setup-skill
-cp -R skills-kit/skills/swarm-forge-skill  /path/to/your/workspace/.claude/skills/swarm-forge-skill
-cp -R skills-kit/skills/path-context-skill /path/to/your/workspace/.claude/skills/path-context-skill
-cp -R skills-kit/skills/api-test-skill    /path/to/your/workspace/.claude/skills/api-test-skill
-```
+This will automatically download and install the skill to the appropriate agent skills directory.
 
 ## Usage
 
 Skills activate automatically when the agent detects relevant trigger phrases. See each skill's `README.md` or `SKILL.md` for specific triggers and what they produce.
+
+## Creating Latest Release with gh
+
+To create a new release and tag it as `latest`:
+
+```bash
+# First, create a new release
+gh release create v1.0.0 --title "v1.0.0" --notes "Release notes here"
+
+# Then, update the latest tag to point to this release
+gh release delete latest --yes 2>/dev/null || true
+gh release create latest --title "Latest" --notes "Latest release" --target v1.0.0
+```
+
+Or create a release directly as latest:
+
+```bash
+gh release create latest --title "Latest Release" --notes "Latest release notes" --target main
+```
 
 ## Repository Layout
 

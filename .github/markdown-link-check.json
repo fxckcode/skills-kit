@@ -1,0 +1,14 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^https://github.com/fxckcode/skills-kit"
+    },
+    {
+      "pattern": "^#"
+    }
+  ],
+  "aliveStatusCodes": [200, 429]
+}

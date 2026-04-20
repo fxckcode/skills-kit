@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate repository structure
+        run: |
+          echo "Validating skills-kit repository structure..."
+          
+          # Verificar archivos esenciales
+          required_files=("README.md" "LICENSE" ".gitignore" ".gitattributes" "CHANGELOG.md")
+          for file in "${required_files[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✅ $file exists"
+            else
+              echo "❌ $file missing"
+              exit 1
+            fi
+          done
+          
+          # Verificar directorio skills
+          if [ -d "skills" ]; then
+            echo "✅ skills directory exists"
+            skill_count=$(find skills -maxdepth 1 -type d | wc -l)
+            echo "📁 Found $((skill_count - 1)) skills"
+          else
+            echo "❌ skills directory missing"
+            exit 1
+          done
+          
+          # Verificar que cada skill tenga SKILL.md
+          for skill_dir in skills/*/; do
+            if [ -d "$skill_dir" ]; then
+              skill_name=$(basename "$skill_dir")
+              if [ -f "$skill_dir/SKILL.md" ]; then
+                echo "✅ $skill_name has SKILL.md"
+              else
+                echo "⚠️  $skill_name missing SKILL.md"
+              fi
+            fi
+          done
+          
+          echo "✅ Repository structure validation passed"
+
+      - name: Check Markdown formatting
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
+          use-verbose-mode: 'yes'
+          config-file: '.github/markdown-link-check.json'
+
+  release:
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get version from CHANGELOG
+        id: get_version
+        run: |
+          if grep -q "## Unreleased" CHANGELOG.md; then
+            echo "No new version to release (still Unreleased)"
+            echo "should_release=false" >> $GITHUB_OUTPUT
+          else
+            # Extraer la última versión del CHANGELOG
+            VERSION=$(grep -E '^## [0-9]+\.[0-9]+\.[0-9]+' CHANGELOG.md | head -1 | sed 's/## //' | awk '{print $1}')
+            echo "Latest version: $VERSION"
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
+            echo "should_release=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create GitHub Release
+        if: steps.get_version.outputs.should_release == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.get_version.outputs.version }}
+          name: Release ${{ steps.get_version.outputs.version }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
