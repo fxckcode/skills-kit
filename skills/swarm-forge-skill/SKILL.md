@@ -4,7 +4,7 @@ description: >
   Sets up or refines repository AI workflow context across multiple CLI targets and four development patterns: TDD, BDD, ATDD, and SDD. Use when the user says things like "set up this repo for Claude Code", "set up this repo for Codex", "prepare the agent workflow", "add a TDD setup", "make this BDD-friendly", "set up ATDD", "set up spec driven development", or "review this project and scaffold the context files". It inspects the repo, chooses or confirms suitable CLI targets, setup patterns, and one of the four supported development patterns, asks only missing setup questions, runs bundled scaffold scripts when needed, and safely merges into existing project context files.
 license: Apache-2.0
 metadata:
-  author: gentleman-programming
+  author: fxckcode
   version: "1.0"
 ---
 
