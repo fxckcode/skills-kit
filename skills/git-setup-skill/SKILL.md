@@ -1,6 +1,11 @@
 ---
 name: git-setup-skill
-description: Prepares Git/GitHub repositories with .gitignore, .gitattributes, README files, licensing, metadata, tags, releases, and GitHub Actions. Use when the user wants to set up or professionalize a repository, add documentation or licensing, configure CI, or prepare releases and repo metadata.
+description: >
+  Prepares Git/GitHub repositories with .gitignore, .gitattributes, README files, licensing, metadata, tags, releases, and GitHub Actions. Use when the user wants to set up or professionalize a repository, add documentation or licensing, configure CI, or prepare releases and repo metadata.
+license: Apache-2.0
+metadata:
+  author: gentleman-programming
+  version: "1.0"
 ---
 
 # Git Repo Setup
