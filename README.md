@@ -45,24 +45,7 @@ This will automatically download and install the skill to the appropriate agent 
 
 Skills activate automatically when the agent detects relevant trigger phrases. See each skill's `README.md` or `SKILL.md` for specific triggers and what they produce.
 
-## Creating Latest Release with gh
 
-To create a new release and tag it as `latest`:
-
-```bash
-# First, create a new release
-gh release create v1.0.0 --title "v1.0.0" --notes "Release notes here"
-
-# Then, update the latest tag to point to this release
-gh release delete latest --yes 2>/dev/null || true
-gh release create latest --title "Latest" --notes "Latest release" --target v1.0.0
-```
-
-Or create a release directly as latest:
-
-```bash
-gh release create latest --title "Latest Release" --notes "Latest release notes" --target main
-```
 
 ## Repository Layout
 
