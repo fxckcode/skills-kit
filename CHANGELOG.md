@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Add 6 new skills: `npm-supply-chain-security`, `verification-loop`, `go-quality`, `env-secrets-management`, `codebase-audit`, `loop-engineering`
+- Update README with all 10 skills
+
 ## 0.2.0 - 2026-04-18
 
 - Consolidate `git-setup-skill`, `swarm-forge-skill`, and `path-context-skill` into a single repository under `skills/`.
